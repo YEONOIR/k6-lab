@@ -1,0 +1,8 @@
+- Step 0.7:
+  - Normal run:
+    - p(95): 2390 ms (FAIL)
+    - p(99): 3690 ms (FAIL)
+    - http_req_failed: 0.00% (PASS)
+    - Total requests: 45
+    - Request rate: 1.343 req/s
+    - Checks succeeded: 100%
