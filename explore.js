@@ -1,12 +1,22 @@
 import http from 'k6/http';
 
 const BASE_URL = 'https://quickpizza.grafana.com';
-const PARAMS = { headers: { Authorization: 'token abcdef0123456789' } };
+
+const PARAMS = {
+  headers: {
+    'Content-Type': 'application/json',
+    Authorization: 'token abcdef0123456789',
+  },
+};
 
 export default function () {
-  const toppings = http.get(`${BASE_URL}/api/ingredients/topping`, PARAMS);
-  console.log(toppings.body);
+  const body = JSON.stringify({
+    excludedIngredients: ['pepperoni'],
+    excludedTools: ['knife'],
+  });
 
-  const tools = http.get(`${BASE_URL}/api/tools`, PARAMS);
-  console.log(tools.body);
+  const res = http.post(`${BASE_URL}/api/pizza`, body, PARAMS);
+
+  console.log('STATUS: ' + res.status);
+  console.log('RESPONSE: ' + res.body);
 }
